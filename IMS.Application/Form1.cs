@@ -37,28 +37,80 @@ namespace IMS.Application
             LoadPrograms(textBoxSearch.Text.ToLower());
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonSave_Click(object sender, EventArgs e)
         {
-            using (var _context = new AppDbContext())
+            try
             {
-                try
+                using (var _context = new AppDbContext())
                 {
-                    var program = new Programs
+                    if (string.IsNullOrEmpty(textBoxId.Text.Trim()))
                     {
-                        Name = textBoxName.Text.Trim(),
-                        Description = textBoxDexcription.Text.Trim()
-                    };
+                        var program = new Programs
+                        {
+                            Name = textBoxName.Text.Trim(),
+                            Description = textBoxDescription.Text.Trim()
+                        };
 
-                    _context.Programs.Add(program);
+                        _context.Programs.Add(program);
+                    }
+                    else
+                    {
+                        var ProgramId = int.Parse(textBoxId.Text.Trim());
+                        var entity = _context.Programs.Find(ProgramId);
+                        if (entity != null)
+                        {
+                            entity.Name = textBoxName.Text.Trim();
+                            entity.Description = textBoxDescription.Text.Trim();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Program not found for update.");
+                            return;
+                        }
+                        _context.Programs.Update(entity);
+                    }
+
                     _context.SaveChanges();
 
-                    MessageBox.Show("Program saved succesfully");
+                    MessageBox.Show("Program saved/updated succesfully");
                     LoadPrograms();
                 }
-                catch (Exception ex)
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var _context = new AppDbContext())
                 {
-                    MessageBox.Show(ex.Message);
+                    if (string.IsNullOrEmpty(textBoxName.Text.Trim()))
+                    {
+                        MessageBox.Show("Please enter a valid Program ID to delete");
+                        return;
+                    }
+                    var programId = int.Parse(textBoxId.Text.Trim());
+                    var entity = _context.Programs.FirstOrDefault(p => p.Id == programId);
+                    if (entity != null)
+                    {
+                        _context.Programs.Remove(entity);
+                        _context.SaveChanges();
+                        MessageBox.Show("Program deleted succesfully!");
+                        LoadPrograms();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Program not found for deletion");
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

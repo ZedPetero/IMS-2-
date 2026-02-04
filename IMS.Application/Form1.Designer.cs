@@ -35,9 +35,10 @@
             label2 = new Label();
             textBoxName = new TextBox();
             label3 = new Label();
-            textBoxDexcription = new TextBox();
+            textBoxDescription = new TextBox();
             label4 = new Label();
-            button1 = new Button();
+            buttonSave = new Button();
+            buttonDelete = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -99,12 +100,12 @@
             label3.TabIndex = 5;
             label3.Text = "Name";
             // 
-            // textBoxDexcription
+            // textBoxDescription
             // 
-            textBoxDexcription.Location = new Point(29, 292);
-            textBoxDexcription.Name = "textBoxDexcription";
-            textBoxDexcription.Size = new Size(271, 23);
-            textBoxDexcription.TabIndex = 8;
+            textBoxDescription.Location = new Point(29, 292);
+            textBoxDescription.Name = "textBoxDescription";
+            textBoxDescription.Size = new Size(271, 23);
+            textBoxDescription.TabIndex = 8;
             // 
             // label4
             // 
@@ -115,15 +116,25 @@
             label4.TabIndex = 7;
             label4.Text = "Description";
             // 
-            // button1
+            // buttonSave
             // 
-            button1.Location = new Point(29, 360);
-            button1.Name = "button1";
-            button1.Size = new Size(271, 23);
-            button1.TabIndex = 9;
-            button1.Text = "Save";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            buttonSave.Location = new Point(29, 344);
+            buttonSave.Name = "buttonSave";
+            buttonSave.Size = new Size(271, 23);
+            buttonSave.TabIndex = 9;
+            buttonSave.Text = "Save";
+            buttonSave.UseVisualStyleBackColor = true;
+            buttonSave.Click += buttonSave_Click;
+            // 
+            // buttonDelete
+            // 
+            buttonDelete.Location = new Point(29, 387);
+            buttonDelete.Name = "buttonDelete";
+            buttonDelete.Size = new Size(271, 23);
+            buttonDelete.TabIndex = 10;
+            buttonDelete.Text = "Delete";
+            buttonDelete.UseVisualStyleBackColor = true;
+            buttonDelete.Click += buttonDelete_Click;
             // 
             // Form1
             // 
@@ -131,8 +142,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Cyan;
             ClientSize = new Size(800, 450);
-            Controls.Add(button1);
-            Controls.Add(textBoxDexcription);
+            Controls.Add(buttonDelete);
+            Controls.Add(buttonSave);
+            Controls.Add(textBoxDescription);
             Controls.Add(label4);
             Controls.Add(textBoxName);
             Controls.Add(label3);
@@ -157,8 +169,9 @@
         private Label label2;
         private TextBox textBoxName;
         private Label label3;
-        private TextBox textBoxDexcription;
+        private TextBox textBoxDescription;
         private Label label4;
-        private Button button1;
+        private Button buttonSave;
+        private Button buttonDelete;
     }
 }
